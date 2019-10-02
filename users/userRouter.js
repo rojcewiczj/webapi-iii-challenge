@@ -68,8 +68,18 @@ router.get('/:id', [ validateUserId ], (req, res) => {
        });
 });
 
-router.get('/:id/posts', [ validateUserId ],(req, res) => {
-
+router.get('/:id/posts', [ validateUserId, validatePost ],(req, res) => {
+    Users.getUserPosts(req.params.id)
+    .then(posts => {
+      res.status(200).json(posts);
+    })
+    .catch(error => {
+      // log error to server
+      console.log(error);
+      res.status(500).json({
+        message: 'Error getting the posts of this user',
+      });
+    });
 });
 
 router.delete('/:id', [ validateUserId ], (req, res) => {
