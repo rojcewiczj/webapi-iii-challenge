@@ -1,7 +1,7 @@
-const express = 'express';
+const express = require('express');
 const Users = require('./userDb')
 const Posts = require('../posts/postDb')
-const router = express.Router();
+const router = express.Router()
 router.use((req, res, next) => {
     console.log('User Router!');
     next();
