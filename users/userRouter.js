@@ -9,7 +9,18 @@ router.use((req, res, next) => {
 
 
 router.post('/', [validateUser], (req, res) => {
-
+    const newUser = req.body
+    Users.insert(newUser)
+    .then(user => {
+        res.status(201).json(user);
+      })
+      .catch(error => {
+        // log error to database
+        console.log(error);
+        res.status(500).json({
+          error: 'There was an error while saving the user to the database',
+        });
+      });
 });
 
 router.post('/:id/posts', [ validateUserId , validatePost ], (req, res) => {
