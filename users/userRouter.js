@@ -83,11 +83,39 @@ router.get('/:id/posts', [ validateUserId, validatePost ],(req, res) => {
 });
 
 router.delete('/:id', [ validateUserId ], (req, res) => {
-
+    Users.remove(req.params.id)
+    .then(count => {
+      if (count > 0) {
+        res.status(200).json({ message: 'This user has been removed' });
+      } else {
+        res.status(404).json({ message: 'The user could not be found' });
+      }
+    })
+    .catch(error => {
+      // log error to server
+      console.log(error);
+      res.status(500).json({
+        message: 'Error removing this user',
+      });
+    });
 });
 
-router.put('/:id', [ validateUserId ], (req, res) => {
-
+router.put('/:id', [ validateUserId, validateUser ], (req, res) => {
+    Users.update(req.params.id, req.body)
+    .then(count => {
+        if (count === 1) {
+          res.status(200).json({ message: 'This user has been updated' });
+        } else {
+          res.status(404).json({ message: 'This user was not found' });
+        }
+      })
+      .catch(error => {
+        // log error to server
+        console.log(error);
+        res.status(500).json({
+          message: 'Error updating the user',
+        });
+      });
 });
 
 //custom middleware
