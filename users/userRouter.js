@@ -1,5 +1,6 @@
 const express = 'express';
 const Users = require('./userDb')
+const Posts = require('../posts/postDb')
 const router = express.Router();
 router.use((req, res, next) => {
     console.log('User Router!');
@@ -7,36 +8,36 @@ router.use((req, res, next) => {
   });
 
 
-router.post('/', logger, (req, res) => {
+router.post('/', [validateUser], (req, res) => {
 
 });
 
-router.post('/:id/posts', [logger, validateUserId], (req, res) => {
+router.post('/:id/posts', [ validateUserId , validatePost ], (req, res) => {
 
 });
 
-router.get('/', logger,(req, res) => {
+router.get('/', (req, res) => {
 
 });
 
-router.get('/:id', [logger, validateUserId], (req, res) => {
+router.get('/:id', [ validateUserId ], (req, res) => {
 
 });
 
-router.get('/:id/posts', [logger, validateUserId],(req, res) => {
+router.get('/:id/posts', [ validateUserId ],(req, res) => {
 
 });
 
-router.delete('/:id', [logger, validateUserId], (req, res) => {
+router.delete('/:id', [ validateUserId ], (req, res) => {
 
 });
 
-router.put('/:id', [logger, validateUserId], (req, res) => {
+router.put('/:id', [ validateUserId ], (req, res) => {
 
 });
 
 //custom middleware
-function logger()
+
 function validateUserId(req, res, next) {
     const { id } = req.params;
     Users.findById(id)
@@ -60,13 +61,7 @@ function validateUserId(req, res, next) {
     });
 };
 
-function logger(req, res, next) {
-    console.log(
-      `[${new Date().toISOString()}] ${req.method} to ${req.url} `
-    );
-  
-    next();
-  }
+
 
 
 
