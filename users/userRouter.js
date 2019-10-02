@@ -40,11 +40,32 @@ router.post('/:id/posts', [ validateUserId , validatePost ], (req, res) => {
 });
 
 router.get('/', (req, res) => {
-
+    Users.get(req.query)
+    .then(users => {
+      res.status(200).json(users);
+    })
+    .catch(error => {
+      // log error to database
+      console.log(error);
+      res.status(500).json({
+        message: 'The users could not be retrieved.',
+      });
+    });
 });
 
 router.get('/:id', [ validateUserId ], (req, res) => {
-
+    const id = req.params.id;
+    Users.getById(id)
+       .then(user => {
+           res.status(200).json(user);
+       })
+       .catch(error => {
+         // log error to database
+         console.log(error);
+         res.status(500).json({
+           error: '"This users information could not be retrieved."',
+         });
+       });
 });
 
 router.get('/:id/posts', [ validateUserId ],(req, res) => {
@@ -63,7 +84,7 @@ router.put('/:id', [ validateUserId ], (req, res) => {
 
 function validateUserId(req, res, next) {
     const { id } = req.params;
-    Users.findById(id)
+    Users.getById(id)
     .then(user => {
       if (user) {
         req.user = user;
