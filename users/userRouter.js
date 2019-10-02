@@ -24,7 +24,19 @@ router.post('/', [validateUser], (req, res) => {
 });
 
 router.post('/:id/posts', [ validateUserId , validatePost ], (req, res) => {
+    const Post = { ...req.body, user_id: req.params.id };
 
+    Posts.add(Post)
+    .then(post => {
+      res.status(210).json(post);
+    })
+    .catch(error => {
+      // log error to server
+      console.log(error);
+      res.status(500).json({
+        message: 'Error getting the post for the user',
+      });
+    });
 });
 
 router.get('/', (req, res) => {
