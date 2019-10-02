@@ -1,32 +1,37 @@
 const express = 'express';
 const Users = require('./userDb')
 const router = express.Router();
+router.use((req, res, next) => {
+    console.log('User Router!');
+    next();
+  });
 
-router.post('/', (req, res) => {
 
-});
-
-router.post('/:id/posts', (req, res) => {
-
-});
-
-router.get('/', (req, res) => {
+router.post('/', logger, (req, res) => {
 
 });
 
-router.get('/:id', (req, res) => {
+router.post('/:id/posts', [logger, validateUserId], (req, res) => {
 
 });
 
-router.get('/:id/posts', (req, res) => {
+router.get('/', logger,(req, res) => {
 
 });
 
-router.delete('/:id', (req, res) => {
+router.get('/:id', [logger, validateUserId], (req, res) => {
 
 });
 
-router.put('/:id', (req, res) => {
+router.get('/:id/posts', [logger, validateUserId],(req, res) => {
+
+});
+
+router.delete('/:id', [logger, validateUserId], (req, res) => {
+
+});
+
+router.put('/:id', [logger, validateUserId], (req, res) => {
 
 });
 
