@@ -23,22 +23,8 @@ const initialPost = {
           .catch(error => console.log(error));
           
       }
-     const toggle = () => {
-       if(showing === true) {
-         setShowing(false)
-       }
-       else if(showing === false) {
-         setShowing(true);
-       }
-     }
-     const postToggle = () => {
-      if(postShowing === true) {
-        setPostShowing(false)
-      }
-      else if(postShowing === false) {
-        setPostShowing(true);
-      }
-    }
+    
+    
     
      const getComments= () => {
 
@@ -113,7 +99,7 @@ const initialPost = {
       .catch(err => console.log(err.response));
   };
       return (
-         <div>
+         <div className="main-container">
              <div className="Post-container">
  {!editing && (
     <form onSubmit={createPost}>
@@ -145,18 +131,17 @@ const initialPost = {
          
           <div className="button-row">
             <button type="submit">save</button>
-            <button onClick={() => setEditing(false)}>cancel</button>
+            <button onClick={() => setEditing(false)} onClick={() => setPostShowing(true)}>cancel</button>
           </div>
         </form>
         )}
         {editing && (
     <form onSubmit={saveEdit}>
      
-          <legend> Edit The User </legend>
          
-          <div>
-            <button className="Comments-show" onClick={() => getComments()}> posts</button>
-           
+         {postShowing && (
+          <div >
+   <button className="Comments-show" onClick={() => getComments()} > posts</button>
             {console.log("user posts >", comments)}
             {comments.map(comment => (
               <div>
@@ -165,7 +150,8 @@ const initialPost = {
            
             ))}
             </div>
-          
+            )}
+            <legend> Edit The User </legend>
           <label>
             Name:
             <input type="text"

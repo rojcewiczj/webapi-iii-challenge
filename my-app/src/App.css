@@ -7,7 +7,7 @@
 }
 
 .App-header {
-  background-color: #7c9ad4;
+  background-color: #16351f;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -33,7 +33,7 @@ button {
   width: 80px;
 
    border: none;
-   background-color: rgb(175, 81, 18);
+   background-color: rgb(151, 65, 65);
    color: white;
    padding: 3px 8px;
    margin-top: 25px;
@@ -50,7 +50,7 @@ button {
   margin-right: 8px;
 }
 .list {
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.39), 0 3px 6px rgba(207, 206, 206, 0.23);
+  box-shadow: 0px 3px 6px rgba(207, 201, 201, 0.39), 0 3px 6px rgba(235, 221, 221, 0.23);
 }
 
 .hobbit-container {
@@ -63,7 +63,7 @@ button {
 
   height: 250px;
   width: 420px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 3px 6px rgba(146, 33, 33, 0.16), 0 3px 6px rgba(194, 80, 80, 0.23);
   
   }
 
@@ -99,7 +99,7 @@ form {
  legend {
     padding-left: 40px;
     font-weight: bold;
-    color: rgb(180, 81, 35);
+    color: rgb(151, 65, 65);
     text-align: start;
     margin-bottom: 18px;
     margin-top: -10px;
@@ -108,4 +108,10 @@ form {
   input {
     width: 120px;
   }
-
+  
+  .main-container {
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+    width: 50%;
+  }
