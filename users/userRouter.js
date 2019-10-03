@@ -26,7 +26,7 @@ router.post('/', [validateUser], (req, res) => {
 router.post('/:id/posts', [ validateUserId , validatePost ], (req, res) => {
     const Post = { ...req.body, user_id: req.params.id };
 
-    Posts.add(Post)
+    Posts.insert(Post)
     .then(post => {
       res.status(210).json(post);
     })
@@ -68,7 +68,7 @@ router.get('/:id', [ validateUserId ], (req, res) => {
        });
 });
 
-router.get('/:id/posts', [ validateUserId, validatePost ],(req, res) => {
+router.get('/:id/posts', [ validateUserId],(req, res) => {
     Users.getUserPosts(req.params.id)
     .then(posts => {
       res.status(200).json(posts);
